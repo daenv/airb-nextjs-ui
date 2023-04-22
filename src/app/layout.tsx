@@ -3,7 +3,7 @@ import './globals.css';
 import ClientOnly from './components/ClientOnly';
 import Navbar from './components/Navbar/index';
 import RegisterModal from './components/RegisterModal';
-
+import ToasterProvider from './providers/ToasterProvider';
 
 export const metadata = {
    title: 'AirB',
@@ -12,12 +12,17 @@ export const metadata = {
 const font = Nunito({
    subsets: ['latin'],
 });
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+   children,
+}: {
+   children: React.ReactNode;
+}) {
    return (
       <html lang="en">
          <body className={font.className}>
             <ClientOnly>
-               <RegisterModal/>
+               <ToasterProvider />
+               <RegisterModal />
                <Navbar />
             </ClientOnly>
             {children}
