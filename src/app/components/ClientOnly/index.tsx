@@ -15,7 +15,7 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
         return null;
     }
     return (
-        <>
+        <> 
             {children}
         </>
    )

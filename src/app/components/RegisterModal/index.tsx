@@ -1,10 +1,12 @@
-'use client'
+'use client';
 import React, { useCallback, useState } from 'react';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
 import Modal from '../Modal';
+import Heading from '../Heading';
+import Input from '../Inputs/Input';
 const RegisterModal = () => {
    const registerModal = useRegisterModal();
    const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +40,19 @@ const RegisterModal = () => {
    const onToggle = useCallback(() => {
       registerModal.onClose();
    }, [registerModal]);
-
+   const bodyContent = (
+      <div className="flex flex-col gap-4">
+         <Heading title="test" subtitle="1212" />
+         <Input
+            id="email"
+            label="name"
+            disabled={isLoading}
+            register={register}
+            error={errors}
+            required
+         />
+      </div>
+   );
    return (
       <Modal
          disabled={isLoading}
@@ -47,6 +61,7 @@ const RegisterModal = () => {
          actionLabel="Contiune"
          onClose={registerModal.onClose}
          onSubmit={handleSubmit(onSubmit)}
+         body={bodyContent}
       />
    );
 };
