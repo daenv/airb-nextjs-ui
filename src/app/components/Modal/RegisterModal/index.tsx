@@ -7,10 +7,10 @@ import { signIn } from 'next-auth/react';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
-import Modal from '../Modal';
-import Heading from '../Heading';
-import Input from '../Inputs/Input';
-import Button from '../Button';
+import Modal from '..';
+import Heading from '../../Heading';
+import Input from '../../Inputs/Input';
+import Button from '../../Button';
 import { toast } from 'react-hot-toast';
 const RegisterModal = () => {
    const registerModal = useRegisterModal();
@@ -47,7 +47,7 @@ const RegisterModal = () => {
    }, [registerModal]);
    const bodyContent = (
       <div className="flex flex-col gap-4">
-         <Heading title="test" subtitle="1212" />
+         <Heading title="Welcome to AirB" subtitle="Create your account" />
          <Input
             id="email"
             label="Email"
