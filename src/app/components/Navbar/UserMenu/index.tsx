@@ -46,10 +46,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                <div className="flex flex-col cursor-pointer">
                   {currentUser ? (
                      <>
-                        <MenuItem label="My Trip" onClick={() => { }} />
-                        <MenuItem label="My Trip" onClick={() => { }} />
-                        <MenuItem label="My Trip" onClick={() => { }} />
-                        <MenuItem label="My Trip" onClick={() => { }} />
+                        <MenuItem label="My Trip" onClick={() => {}} />
+                        <MenuItem label="My Trip" onClick={() => {}} />
+                        <MenuItem label="My Trip" onClick={() => {}} />
+                        <MenuItem label="My Trip" onClick={() => {}} />
                      </>
                   ) : (
                      <>
@@ -68,8 +68,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                            />
                         </div>
                         <div>
-                           <MenuItem onClick={() => { }} label="AirB Your Home" />
-                           <MenuItem onClick={() => { }} label="Help" />
+                           <MenuItem
+                              onClick={() => {}}
+                              label="AirB Your Home"
+                           />
+                           <MenuItem onClick={() => {}} label="Help" />
                         </div>
                      </>
                   )}
