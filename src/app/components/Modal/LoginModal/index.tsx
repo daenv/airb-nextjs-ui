@@ -1,24 +1,23 @@
 'use client';
-
 import React, { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { FcGoogle } from 'react-icons/fc';
-import { AiFillGithub } from 'react-icons/ai';
-import { useRouter } from 'next/navigation';
-import Modal from '..';
 import useLoginModal from '@/app/hooks/useLoginModal';
-import useRegisterModal from '@/app/hooks/useRegisterModal';
+import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
-import Heading from '../../Heading/index';
+import { useRouter } from 'next/navigation';
+import Modal from '..';
+import Heading from '../../Heading';
 import Input from '../../Inputs/Input';
 import Button from '../../Button';
+
+import { FcGoogle } from 'react-icons/fc';
+import { AiFillGithub } from 'react-icons/ai';
+
 const LoginModal = () => {
    const router = useRouter();
    const loginModal = useLoginModal();
-   const registerModal = useRegisterModal();
    const [isLoading, setIsLoading] = useState(false);
-
    const {
       register,
       handleSubmit,
@@ -38,26 +37,30 @@ const LoginModal = () => {
          redirect: false,
       }).then((callback) => {
          setIsLoading(false);
+
          if (callback?.ok) {
             toast.success('Login successfully!');
             router.refresh();
             loginModal.onClose();
          }
          if (callback?.error) {
-            toast.error(callback.error);
+            toast.error('Something went wrong, please try again!');
          }
       });
    };
+
    const onToggle = useCallback(() => {
       loginModal.onClose();
-      registerModal.onOpen();
-   }, [loginModal, registerModal]);
+   }, [loginModal]);
 
    const bodyContent = (
       <div className="flex flex-col gap-4">
-         <Heading title="Welome Back" subtitle="Login to your account!" />
+         <Heading
+            title="Welcome to Airb"
+            subtitle="Login your account"
+         />
          <Input
-            id="Email"
+            id="email"
             label="Email"
             type="email"
             disabled={isLoading}
@@ -76,24 +79,26 @@ const LoginModal = () => {
          />
       </div>
    );
+
    const footerContent = (
       <div className="flex flex-col gap-4 mt-3">
          <hr />
          <Button
             outline
-            label="Continue with Goole"
+            label="Continue with Google"
             icon={FcGoogle}
-            onClick={() => signIn('google')}
+            onClick={() => signIn('google', { callbackUrl: '/' })}
          />
          <Button
             outline
             label="Continue with Github"
             icon={AiFillGithub}
-            onClick={() => signIn('github')}
+            onClick={() => signIn('github', { callbackUrl: '/' })}
          />
-         <div className="text-neutral-500 text-center mt-4 font-light">
+
+         <div className="text-neutral-800 text-center mt-4 font-light">
             <p>
-               First time using Airbnb?
+               First Time using AirB
                <span
                   onClick={onToggle}
                   className="text-neutral-800 cursor-pointer hover:underline"
