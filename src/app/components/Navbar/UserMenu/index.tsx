@@ -6,12 +6,15 @@ import MenuItem from './MenuItem';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { SafeUser } from '@/app/types';
+import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 interface UserMenuProps {
    currentUser?: SafeUser | null;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+   const router = useRouter();
    const loginModal = useLoginModal();
    const registerModal = useRegisterModal();
    const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +40,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             >
                <AiOutlineMenu />
                <div className="hidden md:block">
-                  <Avatar />
+                  <Avatar src={currentUser?.image}/>
                </div>
             </div>
          </div>
@@ -46,10 +49,31 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                <div className="flex flex-col cursor-pointer">
                   {currentUser ? (
                      <>
-                        <MenuItem label="My Trip" onClick={() => {}} />
-                        <MenuItem label="My Trip" onClick={() => {}} />
-                        <MenuItem label="My Trip" onClick={() => {}} />
-                        <MenuItem label="My Trip" onClick={() => {}} />
+                        <MenuItem
+                           label="My trips"
+                           onClick={() => router.push('/trips')}
+                        />
+                        <MenuItem
+                           label="My favorites"
+                           onClick={() => router.push('/favorites')}
+                        />
+                        <MenuItem
+                           label="My reservations"
+                           onClick={() => router.push('/reservations')}
+                        />
+                        <MenuItem
+                           label="My properties"
+                           onClick={() => router.push('/properties')}
+                        />
+                        <MenuItem
+                           label="Airbnb your home"
+                           onClick={() => {}}
+                        />
+                        <hr />
+                        <MenuItem
+                           label="Logout"
+                           onClick={() => signOut()}
+                        />
                      </>
                   ) : (
                      <>
@@ -72,7 +96,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                               onClick={() => {}}
                               label="AirB Your Home"
                            />
-                           <MenuItem onClick={() => {}} label="Help" />
+                           <MenuItem
+                              onClick={() => {}}
+                              label="Help"
+                           />
                         </div>
                      </>
                   )}
